@@ -43,3 +43,7 @@ Run all Go tests from the repository root:
 ```bash
 make test
 ```
+
+<img width="1451" height="712" alt="image" src="https://github.com/user-attachments/assets/32941734-fbf0-49b9-9874-9997aeb3d56c" />
+
+
