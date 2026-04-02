@@ -64,7 +64,19 @@ func (b *BesuStorageProvider) SetStorageOnBlockchain(ctx context.Context, value 
 		return fmt.Errorf("failed to create transactor: %w", err)
 	}
 
-	parsedABI, err := abi.JSON(strings.NewReader(`[{"inputs":[{"internalType":"uint256","name":"x","type":"uint256"}],"name":"set","outputs":[],"stateMutability":"nonpayable","type":"function"}]`))
+	auth.From = crypto.PubkeyToAddress(privateKey.PublicKey)
+
+	auth.GasLimit = uint64(300000)
+
+	parsedABI, err := abi.JSON(strings.NewReader(`[
+		{
+			"inputs":[{"internalType":"uint256","name":"x","type":"uint256"}],
+			"name":"set",
+			"outputs":[],
+			"stateMutability":"nonpayable",
+			"type":"function"
+		}
+	]`))
 	if err != nil {
 		return fmt.Errorf("failed to parse ABI: %w", err)
 	}
@@ -88,7 +100,7 @@ func (b *BesuStorageProvider) SetStorageOnBlockchain(ctx context.Context, value 
 		nonce,
 		b.contract,
 		big.NewInt(0),
-		300000,
+		auth.GasLimit,
 		gasPrice,
 		data,
 	)
@@ -98,8 +110,7 @@ func (b *BesuStorageProvider) SetStorageOnBlockchain(ctx context.Context, value 
 		return fmt.Errorf("failed to sign tx: %w", err)
 	}
 
-	err = b.client.SendTransaction(ctx, signedTx)
-	if err != nil {
+	if err := b.client.SendTransaction(ctx, signedTx); err != nil {
 		return fmt.Errorf("failed to send tx: %w", err)
 	}
 

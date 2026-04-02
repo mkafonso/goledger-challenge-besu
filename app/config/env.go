@@ -7,10 +7,12 @@ import (
 )
 
 type EnvConfig struct {
-	APIHost              string
-	APIPort              string
-	BlockChainPrivateKey string
-	BlockChainChainID    string
+	APIHost                   string
+	APIPort                   string
+	BlockChainPrivateKey      string
+	BlockChainChainID         string
+	BlockChainRPCURL          string
+	BlockChainContractAddress string
 }
 
 var Env EnvConfig
@@ -19,10 +21,12 @@ func init() {
 	_ = godotenv.Load()
 
 	Env = EnvConfig{
-		APIHost:              getEnv("API_HOST", ""),
-		APIPort:              getEnv("API_PORT", ""),
-		BlockChainPrivateKey: getEnv("BLOCKCHAIN_PRIVATE_KEY", ""),
-		BlockChainChainID:    getEnv("BLOCKCHAIN_CHAIN_ID", ""),
+		APIHost:                   getEnv("API_HOST", ""),
+		APIPort:                   getEnv("API_PORT", ""),
+		BlockChainPrivateKey:      getEnv("BLOCKCHAIN_PRIVATE_KEY", ""),
+		BlockChainChainID:         getEnv("BLOCKCHAIN_CHAIN_ID", ""),
+		BlockChainContractAddress: getEnv("BLOCKCHAIN_CONTRACT_ADDRESS", ""),
+		BlockChainRPCURL:          getEnv("BLOCKCHAIN_RPC_URL", ""),
 	}
 }
 
