@@ -1,3 +1,6 @@
+https://github.com/user-attachments/assets/889aa456-1a46-4963-b69a-f53ca4950c45
+
+
 # GoLedger Challenge - Besu Edition
 
 In this challenge you will interact with a Hyperledger Besu node. The goal is to create a simple application that interacts with a Besu node to transact on a smart contract, read the value of a contract variable, and sync that value to an external database.
