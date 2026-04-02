@@ -1,0 +1,35 @@
+package config
+
+import (
+	"os"
+
+	"github.com/joho/godotenv"
+)
+
+type EnvConfig struct {
+	APIHost              string
+	APIPort              string
+	BlockChainPrivateKey string
+	BlockChainChainID    string
+}
+
+var Env EnvConfig
+
+func init() {
+	_ = godotenv.Load()
+
+	Env = EnvConfig{
+		APIHost:              getEnv("API_HOST", ""),
+		APIPort:              getEnv("API_PORT", ""),
+		BlockChainPrivateKey: getEnv("BLOCKCHAIN_PRIVATE_KEY", ""),
+		BlockChainChainID:    getEnv("BLOCKCHAIN_CHAIN_ID", ""),
+	}
+}
+
+func getEnv(key, defaultVal string) string {
+	if val := os.Getenv(key); val != "" {
+		return val
+	}
+
+	return defaultVal
+}
