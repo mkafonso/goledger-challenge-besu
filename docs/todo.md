@@ -30,16 +30,30 @@
 
 ---
 
+## HTTP API
+
+- [x] Implement handlers:
+  - [x] POST /set
+  - [x] GET /get
+  - [x] POST /sync
+  - [x] GET /check
+- [x] Parse and validate requests
+- [x] Return JSON responses
+
+---
+
 ## Testing
 
 - [x] Unit tests for entities
 - [x] Unit tests for usecases
+- [x] Unit tests for http handlers
 
 ---
 
 ## Error Handling
 
 - [x] Define domain errors
+- [x] Return proper HTTP status codes
 
 ---
 
