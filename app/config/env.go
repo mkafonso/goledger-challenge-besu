@@ -13,6 +13,7 @@ type EnvConfig struct {
 	BlockChainChainID         string
 	BlockChainRPCURL          string
 	BlockChainContractAddress string
+	DatabaseURL               string
 }
 
 var Env EnvConfig
@@ -27,6 +28,7 @@ func init() {
 		BlockChainChainID:         getEnv("BLOCKCHAIN_CHAIN_ID", ""),
 		BlockChainContractAddress: getEnv("BLOCKCHAIN_CONTRACT_ADDRESS", ""),
 		BlockChainRPCURL:          getEnv("BLOCKCHAIN_RPC_URL", ""),
+		DatabaseURL:               getEnv("DATABASE_URL", ""),
 	}
 }
 
