@@ -3,13 +3,28 @@ CONTRACT_DIR := SimpleStorage
 ENV_FILE     := $(CONTRACT_DIR)/.env
 ENV_EXAMPLE  := $(CONTRACT_DIR)/.env.example
 
+APP_DIR         := app
+APP_ENV_FILE    := $(APP_DIR)/.env
+APP_ENV_EXAMPLE := $(APP_DIR)/.env.example
+
 DB_NAME      := app-besu-node-db
 DB_USER      := postgres
 DB_PASSWORD  := postgres
 DB_PORT      := 5432
 DB_CONTAINER := postgres-devnet
 
-.PHONY: devnet stop-devnet deploy devnet-deploy api postgres createdb migrateup generate_sqlc sqlc_down sqlc_up
+TOOLS_DIR := $(CURDIR)/bin
+Tparse    := $(TOOLS_DIR)/tparse
+
+.PHONY: devnet stop-devnet deploy devnet-deploy api postgres createdb migrateup generate_sqlc sqlc_down sqlc_up test tools
+
+# ----------------------------
+# TOOLS (LOCAL INSTALL)
+# ----------------------------
+tools:
+	@mkdir -p $(TOOLS_DIR)
+	@echo "Installing dev tools locally..."
+	@GOBIN=$(TOOLS_DIR) go install github.com/mfridman/tparse@latest
 
 # ----------------------------
 # BESU
@@ -58,9 +73,20 @@ generate_sqlc:
 	@echo "Generating sqlc..."
 	@sqlc generate --file app/infra/db/sqlc.yaml
 
+sqlc_up:
+	@if command -v sqlc >/dev/null 2>&1; then \
+		echo "Generating sqlc..."; \
+		sqlc generate --file app/infra/db/sqlc.yaml; \
+	else \
+		echo "sqlc not found — skipping generation"; \
+	fi
+
+sqlc_down:
+	@echo "Nothing to do"
+
 
 # ----------------------------
-# DEPLOY CONTRACT
+# CONTRACT DEPLOY
 # ----------------------------
 deploy:
 	@if [ ! -f $(ENV_FILE) ]; then \
@@ -77,6 +103,10 @@ deploy:
 # FULL BOOTSTRAP
 # ----------------------------
 devnet-deploy:
+	@if [ ! -f $(APP_ENV_FILE) ]; then \
+		echo "No app .env found — copying from .env.example"; \
+		cp $(APP_ENV_EXAMPLE) $(APP_ENV_FILE); \
+	fi
 	@make postgres
 	@sleep 2
 	@make createdb
@@ -93,3 +123,19 @@ devnet-deploy:
 # ----------------------------
 api:
 	cd app && go run ./cmd/api/main.go
+
+
+# ----------------------------
+# TEST (NORMAL)
+# ----------------------------
+test:
+	@echo "Running tests (standard)..."
+	@cd app && go test ./... -v
+
+
+# ----------------------------
+# TEST (BEAUTIFY)
+# ----------------------------
+test-beautify: tools
+	@echo "Running tests (beautified)..."
+	@cd app && go test ./... -json | $(Tparse) -all
