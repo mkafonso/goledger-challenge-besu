@@ -7,3 +7,11 @@ func NewInternalError() *AppError {
 		Action:  "please try again later or contact support",
 	}
 }
+
+func NewBadRequestError(message string) *AppError {
+	return &AppError{
+		Code:    "BAD_REQUEST",
+		Message: message,
+		Action:  "please check request payload and try again",
+	}
+}
