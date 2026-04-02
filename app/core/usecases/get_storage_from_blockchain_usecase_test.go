@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	memory_providers "github.com/mkafonso/goledger-challenge-besu/__tests__/providers"
 	usecase "github.com/mkafonso/goledger-challenge-besu/core/usecases"
+	memory_providers "github.com/mkafonso/goledger-challenge-besu/tests/providers"
 	"github.com/stretchr/testify/assert"
 )
 

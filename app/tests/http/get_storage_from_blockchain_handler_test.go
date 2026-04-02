@@ -6,9 +6,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	memory_providers "github.com/mkafonso/goledger-challenge-besu/__tests__/providers"
 	usecases "github.com/mkafonso/goledger-challenge-besu/core/usecases"
 	httpinfra "github.com/mkafonso/goledger-challenge-besu/infra/http"
+	memory_providers "github.com/mkafonso/goledger-challenge-besu/tests/providers"
 
 	"github.com/stretchr/testify/assert"
 )
