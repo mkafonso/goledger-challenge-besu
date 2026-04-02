@@ -7,3 +7,11 @@ func NewErrorUnableToReadFromBlockchain() *AppError {
 		Action:  "please verify blockchain connectivity and contract state",
 	}
 }
+
+func NewErrorUnableToWriteToBlockchain() *AppError {
+	return &AppError{
+		Code:    "BLOCKCHAIN_WRITE_FAILED",
+		Message: "unable to write storage to blockchain",
+		Action:  "please verify transaction parameters and try again",
+	}
+}
