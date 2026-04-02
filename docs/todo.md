@@ -65,10 +65,10 @@
 
 ## Final Validation
 
-- [ ] Can set value on blockchain
-- [ ] Can get value from blockchain
-- [ ] Can sync value to DB
-- [ ] Can compare DB vs blockchain
-- [ ] API works end-to-end
-- [ ] Tests pass
-- [ ] Code is clean and organized
+- [x] Can set value on blockchain
+- [x] Can get value from blockchain
+- [x] Can sync value to DB
+- [x] Can compare DB vs blockchain
+- [x] API works end-to-end
+- [x] Tests pass
+- [x] Code is clean and organized
