@@ -17,6 +17,7 @@ func TestNewStorage(t *testing.T) {
 	assert.NotNil(t, storage)
 
 	assert.Equal(t, value, storage.Value)
-	assert.NotZero(t, storage.ID)
+
+	assert.False(t, storage.UpdatedAt.IsZero())
 	assert.WithinDuration(t, time.Now().UTC(), storage.UpdatedAt, time.Second)
 }
