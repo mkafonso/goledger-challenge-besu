@@ -9,7 +9,7 @@ DB_PASSWORD  := postgres
 DB_PORT      := 5432
 DB_CONTAINER := postgres-devnet
 
-.PHONY: devnet stop-devnet deploy devnet-deploy postgres createdb migrateup generate_sqlc sqlc_down sqlc_up
+.PHONY: devnet stop-devnet deploy devnet-deploy api postgres createdb migrateup generate_sqlc sqlc_down sqlc_up
 
 # ----------------------------
 # BESU
@@ -85,3 +85,11 @@ devnet-deploy:
 	@make devnet
 	@sleep 3
 	@make deploy
+	@make api
+
+
+# ----------------------------
+# API
+# ----------------------------
+api:
+	cd app && go run ./cmd/api/main.go
