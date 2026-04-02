@@ -10,7 +10,7 @@ import (
 type CheckStorageConsistencyRequest struct{}
 
 type CheckStorageConsistencyResponse struct {
-	Consistent bool
+	Consistent bool `json:"consistent"`
 }
 
 type CheckStorageConsistency struct {

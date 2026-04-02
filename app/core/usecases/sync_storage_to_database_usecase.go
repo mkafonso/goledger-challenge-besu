@@ -10,7 +10,7 @@ import (
 type SyncStorageToDatabaseRequest struct{}
 
 type SyncStorageToDatabaseResponse struct {
-	Success bool
+	Success bool `json:"success"`
 }
 
 type SyncStorageToDatabase struct {

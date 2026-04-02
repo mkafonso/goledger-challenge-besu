@@ -8,11 +8,11 @@ import (
 )
 
 type SetStorageOnBlockchainRequest struct {
-	Value uint64
+	Value uint64 `json:"value"`
 }
 
 type SetStorageOnBlockchainResponse struct {
-	Success bool
+	Success bool `json:"success"`
 }
 
 type SetStorageOnBlockchain struct {

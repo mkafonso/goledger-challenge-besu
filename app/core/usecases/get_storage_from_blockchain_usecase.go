@@ -10,7 +10,7 @@ import (
 type GetStorageFromBlockchainRequest struct{}
 
 type GetStorageFromBlockchainResponse struct {
-	Value uint64
+	Value uint64 `json:"value"`
 }
 
 type GetStorageFromBlockchain struct {
