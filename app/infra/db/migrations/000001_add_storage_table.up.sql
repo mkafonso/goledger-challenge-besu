@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS storage (
+    id SERIAL PRIMARY KEY,
+    value BIGINT NOT NULL,
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
